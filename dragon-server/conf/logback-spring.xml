@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+
+    <!-- 这是 Spring Boot 默认输出格式，挪用了 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 可自定义输出格式
+    <property name="consolePattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %green([%-5level])  %boldYellow([%-20thread]) %boldGreen(%logger{50}) - %msg%n"/>
+    <property name="filePattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%-20thread] %logger{50} - %msg%n"/>
+    -->
+    <!-- 定义日志文件输出目录 -->
+    <property name="LOG_HOME" value="/data1/apps/hanju-routine/admin/logs/"/>
+    <!-- 定义日志文件名称 -->
+    <property name="LOG_FILE_NAME" value="${POD_NAME:-dragon-server}"/>
+
+    <!-- 输出到控制台的 appender -->
+    <appender name="STD_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 滚动记录文件，基于时间以及日志文件大小的轮转 -->
+    <!-- 更多有关 appender 的配置，参见：http://www.logback.cn/04%E7%AC%AC%E5%9B%9B%E7%AB%A0Appenders.html -->
+    <appender name="FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <MaxHistory>60</MaxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 自定义 logger -->
+
+    <logger name="com.dragon.server" level="info" additivity="false">
+        <appender-ref ref="STD_APPENDER"/>
+        <appender-ref ref="FILE_APPENDER"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="STD_APPENDER" />
+        <appender-ref ref="FILE_APPENDER" />
+    </root>
+
+    <!-- 以下也是 Spring Boot 的一些默认 logger -->
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+    <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+    <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+    <logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="ERROR"/>
+
+</configuration>

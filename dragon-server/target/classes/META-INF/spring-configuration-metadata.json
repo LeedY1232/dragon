@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "dragon.resources",
+      "type": "com.dragon.server.config.DragonResourcesProperties",
+      "sourceType": "com.dragon.server.config.DragonResourcesProperties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
