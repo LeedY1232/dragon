@@ -1,6 +1,0 @@
-com\dragon\common\base\db\entity\UserInfo.class
-com\dragon\common\base\db\entity\PunishCard.class
-com\dragon\common\base\model\ResponseCode.class
-com\dragon\common\base\transport\BaseApiResponse$Builder.class
-com\dragon\common\base\transport\BaseApiResponse.class
-com\dragon\common\base\transport\JSON.class
