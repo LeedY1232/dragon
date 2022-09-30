@@ -53,6 +53,7 @@ public class UserService {
             } else {
                 // 存在则更新最后登录时间，后可考虑转用消息队列完成，防止数据库流量过高
                 record.setNickName(request.getNickName());
+                record.setAvatar(request.getAvatar());
                 record.setGender(record.getGender());
                 record.setMobile(record.getMobile());
                 record.setLastLoginTime(System.currentTimeMillis());
