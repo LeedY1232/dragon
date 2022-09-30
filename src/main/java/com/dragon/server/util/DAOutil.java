@@ -21,4 +21,8 @@ public class DAOutil {
         return record;
     }
 
+    public static String generateCardCid(){
+        return "card_"+CryptUtil.md5(String.valueOf(System.currentTimeMillis())).substring(12);
+    }
+
 }

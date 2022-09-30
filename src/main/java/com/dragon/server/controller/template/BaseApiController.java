@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2022/9/29 17:17
  */
 @Controller
-@RequestMapping(value = "/dragon/api/**")
+@RequestMapping(value = "/v2/dragon/api/**")
 public class BaseApiController {
 
 }
