@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dragon.server.dao.PunishCardMapper">
+  <resultMap id="BaseResultMap" type="com.dragon.server.db.entity.PunishCard">
+    <!--@mbg.generated-->
+    <!--@Table punish_card-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="party_kind" jdbcType="INTEGER" property="partyKind" />
+    <result column="card_status" jdbcType="INTEGER" property="cardStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, cid, content, `level`, category, party_kind, card_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from punish_card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from punish_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dragon.server.db.entity.PunishCard" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into punish_card (cid, content, `level`, 
+      category, party_kind, card_status
+      )
+    values (#{cid,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{category,jdbcType=VARCHAR}, #{partyKind,jdbcType=INTEGER}, #{cardStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dragon.server.db.entity.PunishCard">
+    <!--@mbg.generated-->
+    update punish_card
+    <set>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="partyKind != null">
+        party_kind = #{partyKind,jdbcType=INTEGER},
+      </if>
+      <if test="cardStatus != null">
+        card_status = #{cardStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllAvailableCards" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List">
+  </include>
+    from punish_card
+    <where>
+      card_status = 11
+    </where>
+  </select>
+</mapper>

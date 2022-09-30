@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://sh-cynosdbmysql-grp-iomuk6uq.sql.tencentcdb.com:23124/springboot_demo
+    url: jdbc:mysql://sh-cynosdbmysql-grp-iomuk6uq.sql.tencentcdb.com:23124/dragon
     username: root
     password: Dragonback2022
   mvc:
