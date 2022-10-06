@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dragon.server.dao.HouseMapper">
+  <resultMap id="BaseResultMap" type="com.dragon.server.db.entity.House">
+    <!--@mbg.generated-->
+    <!--@Table house-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hid" jdbcType="INTEGER" property="hid" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="member_list" jdbcType="LONGVARCHAR" property="memberList" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, hid, create_user, `status`, create_time, member_list
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from house
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dragon.server.db.entity.House" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into house (hid, create_user, `status`, 
+      create_time, member_list)
+    values (#{hid,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT}, #{memberList,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dragon.server.db.entity.House">
+    <!--@mbg.generated-->
+    update house
+    <set>
+      <if test="hid != null">
+        hid = #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="memberList != null">
+        member_list = #{memberList,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.dragon.server.db.entity.House" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      hid,
+      create_user,
+      `status`,
+      create_time,
+      member_list,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{hid,jdbcType=INTEGER},
+      #{createUser,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER},
+      #{createTime,jdbcType=BIGINT},
+      #{memberList,jdbcType=LONGVARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      hid = #{hid,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      member_list = #{memberList,jdbcType=LONGVARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.dragon.server.db.entity.House" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hid != null">
+        hid,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="memberList != null">
+        member_list,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null">
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="memberList != null">
+        #{memberList,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null">
+        hid = #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="memberList != null">
+        member_list = #{memberList,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByUniqueKey" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List">
+  </include>
+    from house
+    <where>
+      hid = #{hid,jdbcType=INTEGER}
+    </where>
+  </select>
+
+  <select id="selectByDesStatus" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List">
+  </include>
+    from house
+    <where>
+      status = 104
+    </where>
+  </select>
+</mapper>
