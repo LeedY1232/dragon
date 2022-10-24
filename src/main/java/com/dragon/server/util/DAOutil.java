@@ -1,5 +1,9 @@
 package com.dragon.server.util;
 
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.apache.commons.lang3.RandomUtils;
+
 import com.dragon.server.db.entity.User;
 import com.dragon.server.dto.UserLoginRequest;
 
@@ -25,4 +29,7 @@ public class DAOutil {
         return "card_"+CryptUtil.md5(String.valueOf(System.currentTimeMillis())).substring(12);
     }
 
+    public static Integer generateHouseNumber(){
+        return ThreadLocalRandom.current().nextInt(100000,999999);
+    }
 }
